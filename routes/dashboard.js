@@ -61,7 +61,7 @@ router.put("/contacts/:id", authorize, async (req, res) => {
   }
 });
 
-//delete a todo
+//delete a Contacts
 
 router.delete("/contacts/:id", authorize, async (req, res) => {
   try {
@@ -75,7 +75,7 @@ router.delete("/contacts/:id", authorize, async (req, res) => {
       return res.json("This Contact is not yours");
     }
 
-    res.json("Todo was deleted");
+    res.json("Contact was deleted");
   } catch (err) {
     console.error(err.message);
   }

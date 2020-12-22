@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 
-const InputTodo = ({ setContactsChange }) => {
+const InputContact = ({ setContactsChange }) => {
   const [ fullname, setFullname] = useState("");
   const [ details, setDetails] = useState("");
 
@@ -55,4 +55,4 @@ const InputTodo = ({ setContactsChange }) => {
   );
 };
 
-export default InputTodo;
+export default InputContact;

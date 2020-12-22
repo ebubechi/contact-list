@@ -1,11 +1,11 @@
 import React, { Fragment, useState, useEffect } from "react";
-import EditContact from "./EditTodo";
+import EditContact from "./EditContacts";
 
 const ListContacts = ({ allContacts, setContactsChange }) => {
   console.log(allContacts);
   const [contacts, setContacts] = useState([]); //empty array
 
-  //delete todo function
+  //delete contact function
 
   async function deleteContact(id) {
     try {
@@ -20,12 +20,12 @@ const ListContacts = ({ allContacts, setContactsChange }) => {
     }
   }
 
-  // async function getTodos() {
-  //   const res = await fetch("http://localhost:5000/todos");
+  // async function getContacts() {
+  //   const res = await fetch("http://localhost:5000/contacts");
 
-  //   const todoArray = await res.json();
+  //   const contactsArray = await res.json();
 
-  //   setTodos(todoArray);
+  //   setContacts(contactsArray);
   // }
 
   useEffect(() => {

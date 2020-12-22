@@ -3,8 +3,8 @@ import { toast } from "react-toastify";
 
 //components
 
-import InputTodo from "./contactlist/InputTodo";
-import ListTodos from "./contactlist/ListTodos";
+import InputContact from "./contactlist/InputContacts";
+import ListContacts from "./contactlist/ListContacts";
 
 const Dashboard = ({ setAuth }) => {
   const [name, setName] = useState("");
@@ -53,8 +53,8 @@ const Dashboard = ({ setAuth }) => {
         </button>
       </div>
 
-      <InputTodo setContactsChange={setContactsChange} />
-      <ListTodos allContacts={allContacts} setContactsChange={setContactsChange} />
+      <InputContact setContactsChange={setContactsChange} />
+      <ListContacts allContacts={allContacts} setContactsChange={setContactsChange} />
     </div>
   );
 };

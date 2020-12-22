@@ -1,4 +1,4 @@
-import React, { Fragment, useState, setState } from "react";
+import React, { Fragment, useState } from "react";
 
 const EditContact = ({ contact, setContactsChange }) => {
   //editText function
@@ -34,9 +34,7 @@ const EditContact = ({ contact, setContactsChange }) => {
   const [fullname, setFullname] = useState(contact.fullname);
   const [details, setDetails] = useState(contact.details);
 
-  const handleChange = e => {
-    setState(state => ({...state, [e.target.name]: e.target.value}))
-  }
+
   return (
     <Fragment>
       <button
