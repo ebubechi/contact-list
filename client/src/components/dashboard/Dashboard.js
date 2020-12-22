@@ -3,13 +3,13 @@ import { toast } from "react-toastify";
 
 //components
 
-import InputTodo from "./todolist/InputTodo";
-import ListTodos from "./todolist/ListTodos";
+import InputTodo from "./contactlist/InputTodo";
+import ListTodos from "./contactlist/ListTodos";
 
 const Dashboard = ({ setAuth }) => {
   const [name, setName] = useState("");
-  const [allTodos, setAllTodos] = useState([]);
-  const [todosChange, setTodosChange] = useState(false);
+  const [allContacts, setAllContacts] = useState([]);
+  const [contactsChange, setContactsChange] = useState(false);
 
   const getProfile = async () => {
     try {
@@ -20,7 +20,7 @@ const Dashboard = ({ setAuth }) => {
 
       const parseData = await res.json();
 
-      setAllTodos(parseData);
+      setAllContacts(parseData);
 
       setName(parseData[0].user_name);
     } catch (err) {
@@ -41,20 +41,20 @@ const Dashboard = ({ setAuth }) => {
 
   useEffect(() => {
     getProfile();
-    setTodosChange(false);
-  }, [todosChange]);
+    setContactsChange(false);
+  }, [contactsChange]);
 
   return (
     <div>
       <div className="d-flex mt-5 justify-content-around">
-        <h2>{name} 's Todo List</h2>
+        <h2>{name} 's Contact List</h2>
         <button onClick={e => logout(e)} className="btn btn-primary">
           Logout
         </button>
       </div>
 
-      <InputTodo setTodosChange={setTodosChange} />
-      <ListTodos allTodos={allTodos} setTodosChange={setTodosChange} />
+      <InputTodo setContactsChange={setContactsChange} />
+      <ListTodos allContacts={allContacts} setContactsChange={setContactsChange} />
     </div>
   );
 };

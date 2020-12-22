@@ -1,57 +1,67 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, setState } from "react";
 
-const EditTodo = ({ todo, setTodosChange }) => {
+const EditContact = ({ contact, setContactsChange }) => {
   //editText function
 
   const editText = async id => {
     try {
-      const body = { description };
+      const body = { fullname, details };
+
+      console.log(JSON.stringify(body));
+
 
       const myHeaders = new Headers();
 
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("jwt_token", localStorage.token);
 
-      await fetch(`http://localhost:5000/dashboard/todos/${id}`, {
+      await fetch(`http://localhost:5000/dashboard/contacts/${id}`, {
         method: "PUT",
         headers: myHeaders,
         body: JSON.stringify(body)
       });
 
-      setTodosChange(true);
+      setContactsChange(true);
 
-      // window.location = "/";
+      // window.location = "/dashboard";
     } catch (err) {
       console.error(err.message);
     }
   };
+  console.log(contact.fullname)
+  console.log(contact.details)
+ 
+  const [fullname, setFullname] = useState(contact.fullname);
+  const [details, setDetails] = useState(contact.details);
 
-  const [description, setDescription] = useState(todo.description);
+  const handleChange = e => {
+    setState(state => ({...state, [e.target.name]: e.target.value}))
+  }
   return (
     <Fragment>
       <button
         type="button"
         className="btn btn-warning"
         data-toggle="modal"
-        data-target={`#id${todo.todo_id}`}
+        data-target={`#id${contact.contact_id}`}
       >
         Edit
       </button>
       {/* id = "id21"*/}
       <div
         className="modal"
-        id={`id${todo.todo_id}`}
-        onClick={() => setDescription(todo.description)}
+        id={`id${contact.contact_id}`}
+        onClick={() => { setFullname(contact.fullname); setDetails(contact.details);}}
       >
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h4 className="modal-title">Edit Todo</h4>
+              <h4 className="modal-title">Edit contact</h4>
               <button
                 type="button"
                 className="close"
                 data-dismiss="modal"
-                onClick={() => setDescription(todo.description)}
+                onClick={() => { setFullname(contact.fullname); setDetails(contact.details)}}
               >
                 &times;
               </button>
@@ -61,17 +71,26 @@ const EditTodo = ({ todo, setTodosChange }) => {
               <input
                 type="text"
                 className="form-control"
-                value={description}
-                onChange={e => setDescription(e.target.value)}
+                name="fullname"
+                value={fullname}
+                onChange={e => setFullname(e.target.value)}
               />
+              <br/>
+              <input
+              type="text"
+              className="form-control"
+              name="details"
+              value={details}
+              onChange={e => setDetails(e.target.value)}
+             />
             </div>
 
-            <div className="modal-footer">
+            <div className="modal-footer"> 
               <button
                 type="button"
                 className="btn btn-warning"
                 data-dismiss="modal"
-                onClick={() => editText(todo.todo_id)}
+                onClick={() => editText(contact.contact_id)}
               >
                 Edit
               </button>
@@ -79,7 +98,7 @@ const EditTodo = ({ todo, setTodosChange }) => {
                 type="button"
                 className="btn btn-danger"
                 data-dismiss="modal"
-                onClick={() => setDescription(todo.description)}
+                onClick={() => { setFullname(contact.fullname); setDetails(contact.details)}}
               >
                 Close
               </button>
@@ -91,4 +110,4 @@ const EditTodo = ({ todo, setTodosChange }) => {
   );
 };
 
-export default EditTodo;
+export default EditContact;

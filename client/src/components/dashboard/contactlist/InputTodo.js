@@ -1,7 +1,8 @@
 import React, { Fragment, useState } from "react";
 
-const InputTodo = ({ setTodosChange }) => {
-  const [description, setDescription] = useState("");
+const InputTodo = ({ setContactsChange }) => {
+  const [ fullname, setFullname] = useState("");
+  const [ details, setDetails] = useState("");
 
   const onSubmitForm = async e => {
     e.preventDefault();
@@ -11,8 +12,8 @@ const InputTodo = ({ setTodosChange }) => {
       myHeaders.append("Content-Type", "application/json");
       myHeaders.append("jwt_token", localStorage.token);
 
-      const body = { description };
-      const response = await fetch("http://localhost:5000/dashboard/todos", {
+      const body = { fullname, details };
+      const response = await fetch("http://localhost:5000/dashboard/contacts", {
         method: "POST",
         headers: myHeaders,
         body: JSON.stringify(body)
@@ -22,8 +23,9 @@ const InputTodo = ({ setTodosChange }) => {
 
       console.log(parseResponse);
 
-      setTodosChange(true);
-      setDescription("");
+      setContactsChange(true);
+      setFullname("");
+      setDetails("");
       // window.location = "/";
     } catch (err) {
       console.error(err.message);
@@ -35,10 +37,17 @@ const InputTodo = ({ setTodosChange }) => {
       <form className="d-flex" onSubmit={onSubmitForm}>
         <input
           type="text"
-          placeholder="add todo"
+          placeholder="add fullname"
           className="form-control"
-          value={description}
-          onChange={e => setDescription(e.target.value)}
+          value={fullname}
+          onChange={e => setFullname(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="add number or email"
+          className="form-control"
+          value={details}
+          onChange={e => setDetails(e.target.value)}
         />
         <button className="btn btn-success ">Add</button>
       </form>

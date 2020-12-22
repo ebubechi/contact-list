@@ -1,20 +1,20 @@
 import React, { Fragment, useState, useEffect } from "react";
-import EditTodo from "./EditTodo";
+import EditContact from "./EditTodo";
 
-const ListTodos = ({ allTodos, setTodosChange }) => {
-  console.log(allTodos);
-  const [todos, setTodos] = useState([]); //empty array
+const ListContacts = ({ allContacts, setContactsChange }) => {
+  console.log(allContacts);
+  const [contacts, setContacts] = useState([]); //empty array
 
   //delete todo function
 
-  async function deleteTodo(id) {
+  async function deleteContact(id) {
     try {
-      await fetch(`http://localhost:5000/dashboard/todos/${id}`, {
+      await fetch(`http://localhost:5000/dashboard/contacts/${id}`, {
         method: "DELETE",
         headers: { jwt_token: localStorage.token }
       });
 
-      setTodos(todos.filter(todo => todo.todo_id !== id));
+      setContacts(contacts.filter(contact => contact.contact_id !== id));
     } catch (err) {
       console.error(err.message);
     }
@@ -29,10 +29,10 @@ const ListTodos = ({ allTodos, setTodosChange }) => {
   // }
 
   useEffect(() => {
-    setTodos(allTodos);
-  }, [allTodos]);
+    setContacts(allContacts);
+  }, [allContacts]);
 
-  console.log(todos);
+  console.log(contacts);
 
   return (
     <Fragment>
@@ -40,7 +40,8 @@ const ListTodos = ({ allTodos, setTodosChange }) => {
       <table className="table mt-5">
         <thead>
           <tr>
-            <th>Description</th>
+            <th>Full name</th>
+            <th>Details</th>
             <th>Edit</th>
             <th>Delete</th>
           </tr>
@@ -52,18 +53,20 @@ const ListTodos = ({ allTodos, setTodosChange }) => {
             <td>john@example.com</td>
           </tr> */}
 
-          {todos.length !== 0 &&
-            todos[0].todo_id !== null &&
-            todos.map(todo => (
-              <tr key={todo.todo_id}>
-                <td>{todo.description}</td>
+          {contacts.length !== 0 &&
+            contacts[0].contact_id !== null &&
+            contacts.map(contact => (
+              <tr key={contact.contact_id}>
+                
+                <td>{contact.fullname}</td>
+                <td>{contact.details}</td>
                 <td>
-                  <EditTodo todo={todo} setTodosChange={setTodosChange} />
+                  <EditContact contact={contact} setContactsChange={setContactsChange} />
                 </td>
                 <td>
                   <button
                     className="btn btn-danger"
-                    onClick={() => deleteTodo(todo.todo_id)}
+                    onClick={() => deleteContact(contact.contact_id)}
                   >
                     Delete
                   </button>
@@ -76,4 +79,4 @@ const ListTodos = ({ allTodos, setTodosChange }) => {
   );
 };
 
-export default ListTodos;
+export default ListContacts;

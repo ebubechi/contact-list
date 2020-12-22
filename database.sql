@@ -17,8 +17,9 @@
 -- );
 
 
-CREATE DATABASE authtodolist;
+CREATE DATABASE contactlist;
 
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 --users
 
 CREATE TABLE users(
@@ -31,11 +32,12 @@ CREATE TABLE users(
 
 --todos
 
-CREATE TABLE todos(
-  todo_id SERIAL,
+CREATE TABLE contacts(
+  contact_id SERIAL,
   user_id UUID,
-  description VARCHAR(255) NOT NULL,
-  PRIMARY KEY (todo_id),
+  fullname VARCHAR(255) NOT NULL,
+  details VARCHAR(255) NOT NULL,
+  PRIMARY KEY (contact_id),
   FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
